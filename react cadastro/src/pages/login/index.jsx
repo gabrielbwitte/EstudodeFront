@@ -1,10 +1,11 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
 function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -14,8 +15,10 @@ function Login() {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       })
+      localStorage.setItem('token'.token);
       console.log(token)
-      alert('Login feito')
+
+      navigate('/listar-usuarios');
     } catch (error) {
       alert("Senha incoreta.")
     }
